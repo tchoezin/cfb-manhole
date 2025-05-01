@@ -1,0 +1,19 @@
+{
+  "name": "cfb-manhole",
+  "version": "1.0.0",
+  "description": "manhole",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tchoezin/cfb-manhole.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tchoezin/cfb-manhole/issues"
+  },
+  "homepage": "https://github.com/tchoezin/cfb-manhole#readme"
+}
