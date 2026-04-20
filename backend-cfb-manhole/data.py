@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 # data.py
 
 # Division names and player names
@@ -44,24 +42,3 @@ team_conferences = {
     'Oregon': 'Pac-12', 'USC': 'Pac-12', 'Notre Dame': 'Independent', 'Penn State': 'Big Ten', 'Clemson': 'ACC',
     'Florida State': 'ACC', 'Ohio State': 'Big Ten', 'Washington': 'Pac-12'
 }
-
-# Example game results used for score calculation.
-game_results = [
-    ('Alabama', 'Ohio State'),
-    ('LSU', 'Georgia'),
-    ('Texas', 'Michigan'),
-    ('Oregon', 'USC'),
-    ('Notre Dame', 'Clemson'),
-    ('Florida State', 'Iowa'),
-]
-
-
-def make_default_league(league_id='default', league_name='Default League'):
-    return {
-        'id': league_id,
-        'name': league_name,
-        'divisions': deepcopy(divisions),
-        'player_picks': deepcopy(player_picks),
-        'team_conferences': deepcopy(team_conferences),
-        'game_results': deepcopy(game_results),
-    }
