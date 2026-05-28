@@ -50,12 +50,12 @@ func getDivisionMap(playerRanking []playerEntry) map[int][]playerEntry {
 
 func rerank(entries []playerEntry) []playerEntry {
 	output := make([]playerEntry, len(entries))
-	for i, item := range entries {
+	for i, player := range entries {
 		output[i] = playerEntry{
 			Rank:     i + 1,
-			Player:   item.Player,
-			Score:    item.Score,
-			Division: item.Division,
+			Player:   player.Player,
+			Score:    player.Score,
+			Division: player.Division,
 		}
 	}
 	return output

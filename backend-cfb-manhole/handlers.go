@@ -1,10 +1,13 @@
 package main
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 	"strings"
 )
+
+var ErrDivisionNotFound = errors.New("division not found")
 
 type playerEntry struct {
 	Rank     int    `json:"rank"`
