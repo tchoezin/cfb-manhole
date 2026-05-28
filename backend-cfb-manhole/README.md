@@ -30,9 +30,9 @@ go build ./...
   - Returns players ordered by descending score.
 - `GET /api/rankings/divisions`
   - Returns all divisions with division-specific rankings.
-- `GET /api/rankings/division/{divisionName}`
+- `GET /api/rankings/division/{divisionId}`
   - Returns a single division leaderboard.
-  - Example: `/api/rankings/division/Division%201`
+  - Example: `/api/rankings/division/1`
 
 ## CORS
 
@@ -52,7 +52,7 @@ This API includes permissive CORS headers for frontend wiring:
       "rank": 1,
       "player": "JR",
       "score": 7,
-      "division": "Division 1"
+      "division": 1
     }
   ]
 }

@@ -2,7 +2,7 @@ export type RankingEntry = {
   rank: number;
   player: string;
   score: number;
-  division: string;
+  division: number;
 };
 
 export type RankingsResponse = {

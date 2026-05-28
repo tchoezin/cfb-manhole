@@ -72,13 +72,13 @@ var teamConferences = map[string]string{
 	"Colorado State":   "MWC",
 }
 
-var divisions = map[string][]string{
-	"Division 1": {"Taylor", "Alcus", "Ethan", "JR", "Cho", "Gordie"},
-	"Division 2": {"Cam", "Teddy", "Mike", "Jason", "Ian", "Jack M"},
+var divisions = map[int][]string{
+	1: {"Taylor", "Alcus", "Ethan", "JR", "Cho", "Gordie"},
+	2: {"Cam", "Teddy", "Mike", "Jason", "Ian", "Jack M"},
 }
 
-var playerPicks = map[string]map[string][]string{
-	"Division 1": {
+var playerPicks = map[int]map[string][]string{
+	1: {
 		"Taylor": {"Georgia", "Notre Dame", "Michigan", "Oklahoma", "Iowa", "Tulane", "Iowa St", "Wisconsin", "Colorado"},
 		"Alcus":  {"Oregon", "Miami", "Missouri", "Boise State", "Kansas", "SMU", "Louisiana", "Texas State", "Fresno State", "Syracuse"},
 		"Ethan":  {"Texas", "Penn State", "Kansas St", "Memphis", "Louisville", "UCF", "Miami (OH)", "Nebraska", "Auburn", "UNC"},
@@ -86,7 +86,7 @@ var playerPicks = map[string]map[string][]string{
 		"Cho":    {"Alabama", "Utah", "LSU", "Oklahoma St", "Arizona", "UTSA", "Western Kentucky", "Bowling Green", "USC", "Wyoming"},
 		"Gordie": {"FSU", "Ole Miss", "NC State", "Liberty", "App St", "Oregon St", "Virginia Tech", "Washington", "Texas Tech", "Air Force"},
 	},
-	"Division 2": {
+	2: {
 		"Cam":    {"Georgia", "LSU", "Kansas St", "Miami", "Oklahoma", "UCF", "UNLV", "Washington", "UNC", "Auburn"},
 		"Teddy":  {"Ohio State", "Utah", "Clemson", "Tennessee", "Tulane", "Iowa", "Iowa St", "Western Kentucky", "Texas State", "Colorado State"},
 		"Mike":   {"Texas", "FSU", "Boise State", "Kansas", "App St", "Texas a&m", "Virginia Tech", "UTSA", "Louisiana", "Washington State"},
@@ -170,19 +170,19 @@ func calculateScores() map[string]int {
 	return scores
 }
 
-func getOrderedRankings() []rankingEntry {
+func getOrderedRankings() []playerEntry {
 	scores := calculateScores()
 
-	playerDivisions := make(map[string]string)
+	playerDivisions := make(map[string]int)
 	for division, players := range divisions {
 		for _, player := range players {
 			playerDivisions[player] = division
 		}
 	}
 
-	entries := make([]rankingEntry, 0, len(scores))
+	entries := make([]playerEntry, 0, len(scores))
 	for player, score := range scores {
-		entries = append(entries, rankingEntry{
+		entries = append(entries, playerEntry{
 			Player:   player,
 			Score:    score,
 			Division: playerDivisions[player],
