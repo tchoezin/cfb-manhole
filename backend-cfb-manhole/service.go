@@ -1,11 +1,5 @@
 package main
 
-import (
-	"errors"
-)
-
-var ErrDivisionNotFound = errors.New("division not found")
-
 type rankingRepository interface {
 	OrderedRankings() []playerEntry
 }
