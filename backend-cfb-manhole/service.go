@@ -81,7 +81,11 @@ func (s *PlayerService) ListPlayers(ctx context.Context) ([]playerRecord, error)
 }
 
 func (s *PlayerService) GetPlayer(ctx context.Context, playerID string) (playerRecord, error) {
-	return s.repo.GetPlayer(ctx, strings.TrimSpace(playerID))
+	trimmed := strings.TrimSpace(playerID)
+	if trimmed == "" {
+		return playerRecord{}, errors.New("player id is required")
+	}
+	return s.repo.GetPlayer(ctx, trimmed)
 }
 
 func (s *PlayerService) CreatePlayer(ctx context.Context, input createPlayerInput) (playerRecord, error) {
