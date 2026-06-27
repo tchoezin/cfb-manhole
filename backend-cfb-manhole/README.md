@@ -15,10 +15,14 @@ From this folder:
 
 ```bash
 export NEON_DATABASE_URL="postgres://..."
+# Optional outside local development:
+# export CORS_ALLOWED_ORIGINS="https://app.example.com"
 go run .
 ```
 
 Server starts at `http://127.0.0.1:8000`.
+
+If `CORS_ALLOWED_ORIGINS` is unset, the backend only allows browser origins from local development at `http://localhost:3000` and `http://127.0.0.1:3000`.
 
 ## Architecture Role
 
@@ -82,13 +86,15 @@ The backend persists the following tables in Postgres:
 
 The legacy in-memory scoring data still exists only as a seed source for a new database.
 
-## CORS
+## CORS and Write Security
 
-This API includes permissive CORS headers for frontend wiring:
+The backend no longer sends wildcard CORS headers.
 
-- `Access-Control-Allow-Origin: *`
-- `Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS`
-- `Access-Control-Allow-Headers: Content-Type`
+- Allowed browser origins come from `CORS_ALLOWED_ORIGINS` as a comma-separated allowlist.
+- When `CORS_ALLOWED_ORIGINS` is unset, only `http://localhost:3000` and `http://127.0.0.1:3000` are allowed so local frontend development keeps working.
+- Disallowed preflight requests receive `403 Forbidden` and do not get CORS allow headers.
+
+This reduces accidental cross-site access to the write endpoints, but it is not an authentication or CSRF substitute. Before exposing `POST`, `PUT`, or `DELETE` endpoints publicly, add real authn/authz and CSRF defenses or move those operations behind a trusted backend.
 
 ### Example response
 

@@ -31,10 +31,17 @@ type replacePlayerTeamsRequest struct {
 	Teams []string `json:"teams"`
 }
 
-func handleRequest(rankingService *RankingService, playerService *PlayerService) http.HandlerFunc {
+func handleRequest(rankingService *RankingService, playerService *PlayerService, corsPolicy *CORSPolicy) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if corsPolicy != nil {
+			originAllowed := corsPolicy.apply(w, r)
+			if r.Method == http.MethodOptions && !originAllowed {
+				http.Error(w, "CORS origin not allowed", http.StatusForbidden)
+				return
+			}
+		}
+
 		if r.Method == http.MethodOptions {
-			setCommonHeaders(w)
 			w.WriteHeader(http.StatusNoContent)
 			return
 		}
@@ -194,7 +201,6 @@ func handlePlayerDetailRoute(w http.ResponseWriter, r *http.Request, path string
 				return
 			}
 
-			setCommonHeaders(w)
 			w.WriteHeader(http.StatusNoContent)
 			return
 

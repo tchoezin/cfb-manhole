@@ -79,7 +79,7 @@ Responsibilities:
 - Enforce allowed methods.
 - Parse route parameters.
 - Return JSON responses.
-- Apply CORS headers.
+- Apply an origin allowlist for browser CORS requests.
 
 Supported endpoints:
 
@@ -95,6 +95,8 @@ Supported endpoints:
 - `PUT /api/players/{playerId}/teams`
 
 The handler uses basic path matching with string comparisons and prefix checks instead of a dedicated routing library.
+
+The CORS policy is loaded at startup from `CORS_ALLOWED_ORIGINS`. If unset, the backend allows only the local frontend dev origins on port `3000`. Disallowed preflight requests are rejected before they reach the write handlers.
 
 #### 2. Service Layer
 
@@ -179,6 +181,7 @@ This approach keeps the code simple, but it also means:
 - score changes overwrite the current value rather than preserving history,
 - player teams are replaceable by API but expected to remain stable over a season,
 - there is still no authentication or authorization layer around player writes,
+- CORS now reduces accidental cross-site writes from arbitrary browser origins, but it is not a substitute for auth or CSRF protection,
 - scaling beyond the current simple query set would likely benefit from migrations and stronger contract validation.
 
 ## Frontend Architecture
