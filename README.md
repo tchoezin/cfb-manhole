@@ -17,7 +17,7 @@ Run the backend first:
 
 ```bash
 cd backend-cfb-manhole
-export NEON_DATABASE_URL=""
+export NEON_DATABASE_URL="postgres://..."
 go run .
 ```
 
