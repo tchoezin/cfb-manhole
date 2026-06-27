@@ -27,7 +27,7 @@ You can combine `handlers.go` and `responses.go` into one file if you prefer few
 2. Create a new file for JSON response helpers
 - Add `responses.go` in `package main`.
 - Move these helper functions from `main.go` to `responses.go`:
-  - `setCommonHeaders(...)`
+  - `loadCORSPolicy(...)`
   - `sendJSON(...)`
 
 3. Keep shared package access
@@ -49,7 +49,7 @@ You can combine `handlers.go` and `responses.go` into one file if you prefer few
 - Confirm endpoints still respond:
   - `/api/rankings`
   - `/api/rankings/divisions`
-  - `/api/rankings/division/{divisionId}`
+  - `/api/rankings/divisions/{divisionId}`
   - `/health`
 
 ## Optional Improvement (Clean Architecture Lite)
@@ -149,6 +149,6 @@ This gives you cleaner boundaries now without introducing heavy framework or fol
 
 - `main.go` has only bootstrap code.
 - API behavior and JSON output format remain unchanged.
-- CORS headers still present on `GET` and `OPTIONS` responses.
+- Configured CORS headers still present on allowed `GET` and `OPTIONS` responses.
 - `go run .` starts successfully.
 - Existing frontend calls still work with no URL changes.
