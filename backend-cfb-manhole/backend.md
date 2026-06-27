@@ -49,7 +49,7 @@ You can combine `handlers.go` and `responses.go` into one file if you prefer few
 - Confirm endpoints still respond:
   - `/api/rankings`
   - `/api/rankings/divisions`
-  - `/api/rankings/division/{divisionId}`
+  - `/api/rankings/divisions/{divisionId}`
   - `/health`
 
 ## Optional Improvement (Clean Architecture Lite)
